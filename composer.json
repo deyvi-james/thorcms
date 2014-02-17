@@ -1,0 +1,25 @@
+{
+    "name": "mjolnic/thor",
+    "description": "CMS framework for Laravel 4",
+    "authors": [
+        {
+            "name": "Javier Aguilar",
+            "email": "mjolnic@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*",
+        "zizaco/confide": "dev-master",
+        "zizaco/entrust": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Mjolnic\\Thor\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
