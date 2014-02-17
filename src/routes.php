@@ -1,65 +1,43 @@
 <?php
 
 /** ------------------------------------------
- *  Route model binding
- *  ------------------------------------------
- */
-Route::model('user', 'User');
-Route::model('lang', 'Comment');
-Route::model('page', 'Post');
-Route::model('role', 'Role');
-
-/** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
  */
-Route::pattern('lang', '[0-9]+');
-Route::pattern('page', '[0-9]+');
-Route::pattern('user', '[0-9]+');
-Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
-/** ------------------------------------------
- *  Admin Routes
- *  ------------------------------------------
- */
-Route::group(array('prefix' => App::getLocale(), 'before' => 'auth'), function()
-{
-    Route::group(array('prefix' => Config::get('thor::admin.route_prefix'), 'before' => 'auth'), function()
-    {
-        # Lang Management
-        Route::get('langs/{lang}/edit', 'AdminLangsController@getEdit');
-        Route::post('langs/{lang}/edit', 'AdminLangsController@postEdit');
-        Route::get('langs/{lang}/delete', 'AdminLangsController@getDelete');
-        Route::post('langs/{lang}/delete', 'AdminLangsController@postDelete');
-        Route::controller('langs', 'AdminLangsController');
+// MULTILANGUAGE ROUTES
+Route::group(array('prefix' => App::getLocale()), function() {
+    /** ------------------------------------------
+     *  User account Routes
+     *  ------------------------------------------
+     */
+    Route::group(array('prefix' => 'account'), function() {
+        $rt = 'account';
+        $ctrl = '\\Mjolnic\\Thor\\AccountController';
+        Route::get('/', array('as' => $rt . '.show', 'before' => 'auth', 'uses' => $ctrl . '@show'));
+        Route::post('/', array('as' => $rt . '.update', 'before' => 'auth', 'uses' => $ctrl . '@update'));
+        Route::get('signup', array('as' => $rt . '.create', 'uses' => $ctrl . '@create'));
+        Route::post('signup', array('as' => $rt . '.store', 'uses' => $ctrl . '@store'));
+        Route::get('login', array('as' => $rt . '.login', 'uses' => $ctrl . '@login'));
+        Route::post('login', array('as' => $rt . '.do_login', 'uses' => $ctrl . '@do_login'));
+        Route::get('confirm/{code}', array('as' => $rt . '.confirm', 'uses' => $ctrl . '@confirm'));
+        Route::get('forgot', array('as' => $rt . '.forgot', 'uses' => $ctrl . '@forgot_password'));
+        Route::post('forgot', array('as' => $rt . '.do_forgot', 'uses' => $ctrl . '@do_forgot_password'));
+        Route::get('reset/{token}', array('as' => $rt . '.reset', 'uses' => $ctrl . '@reset_password'));
+        Route::post('reset', array('as' => $rt . '.do_reset', 'uses' => $ctrl . '@do_reset_password'));
+        Route::get('logout', array('as' => $rt . '.logout', 'uses' => $ctrl . '@logout'));
+    });
 
-        # Page Management
-        Route::get('pages/{page}/show', 'AdminPagesController@getShow');
-        Route::get('pages/{page}/edit', 'AdminPagesController@getEdit');
-        Route::post('pages/{page}/edit', 'AdminPagesController@postEdit');
-        Route::get('pages/{page}/delete', 'AdminPagesController@getDelete');
-        Route::post('pages/{page}/delete', 'AdminPagesController@postDelete');
-        Route::controller('pages', 'AdminPagesController');
+    /** ------------------------------------------
+     *  Admin Routes
+     *  ------------------------------------------
+     */
+    Route::group(array('prefix' => Config::get('thor::admin.route_prefix'), 'before' => 'auth'), function() {
 
-        # User Management
-        Route::get('users/{user}/show', 'AdminUsersController@getShow');
-        Route::get('users/{user}/edit', 'AdminUsersController@getEdit');
-        Route::post('users/{user}/edit', 'AdminUsersController@postEdit');
-        Route::get('users/{user}/delete', 'AdminUsersController@getDelete');
-        Route::post('users/{user}/delete', 'AdminUsersController@postDelete');
-        Route::controller('users', 'AdminUsersController');
-
-        # User Role Management
-        Route::get('roles/{role}/show', 'AdminRolesController@getShow');
-        Route::get('roles/{role}/edit', 'AdminRolesController@getEdit');
-        Route::post('roles/{role}/edit', 'AdminRolesController@postEdit');
-        Route::get('roles/{role}/delete', 'AdminRolesController@getDelete');
-        Route::post('roles/{role}/delete', 'AdminRolesController@postDelete');
-        Route::controller('roles', 'AdminRolesController');
+        Mjolnic\Thor\Admin::resource('language', 'languages');
 
         # Admin Dashboard
-        Route::controller('/', 'AdminDashboardController');
-
+        //Route::controller('/', 'AdminDashboardController');
     });
 });

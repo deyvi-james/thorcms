@@ -1,0 +1,95 @@
+<?php
+
+namespace Mjolnic\Thor\Seeder;
+
+use Seeder,
+    DB;
+
+class PermissionsTableSeeder extends Seeder {
+
+    public function run() {
+        DB::table('permissions')->truncate();
+
+
+        $permissions = array(
+            array(
+                'name' => 'manage_sites', // for multisite features
+                'display_name' => 'manage sites'
+            ),
+            array(
+                'name' => 'manage_langs',
+                'display_name' => 'manage langs'
+            ),
+            array(
+                'name' => 'manage_strings',
+                'display_name' => 'manage strings'
+            ),
+            array(
+                'name' => 'manage_pages',
+                'display_name' => 'manage pages'
+            ),
+            array(
+                'name' => 'manage_comments',
+                'display_name' => 'manage comments'
+            ),
+            array(
+                'name' => 'manage_users',
+                'display_name' => 'manage users'
+            ),
+            array(
+                'name' => 'manage_roles',
+                'display_name' => 'manage roles'
+            ),
+            array(
+                'name' => 'post_comment',
+                'display_name' => 'post comment'
+            ),
+        );
+
+        DB::table('permissions')->insert($permissions);
+
+        DB::table('permission_role')->delete();
+
+        $permissions = array(
+            array(
+                'role_id' => 1,
+                'permission_id' => 1
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 2
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 3
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 4
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 5
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 6
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 7
+            ),
+            array(
+                'role_id' => 1,
+                'permission_id' => 8
+            ),
+            array(
+                'role_id' => 2,
+                'permission_id' => 8
+            ),
+        );
+
+        DB::table('permission_role')->insert($permissions);
+    }
+
+}

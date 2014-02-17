@@ -28,10 +28,12 @@ class ThorServiceProvider extends ServiceProvider {
                     dd('Locale not found: '.\Request::segment(1));
         });*/
         
-        // To-Do: load language list from database and change the locale config
-        
-        // Detect locale
-        \Mjolnic\Thor\Locale::detect();
+        // Detect locale and language
+        \Mjolnic\Thor\Language::detect();
+
+        include __DIR__.'/../../helpers.php';
+        include __DIR__.'/../../filters.php';
+        include __DIR__.'/../../routes.php';
     }
 
     /**
