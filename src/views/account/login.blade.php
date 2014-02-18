@@ -4,12 +4,13 @@
     <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
     
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="text" name="email" class="form-control" placeholder="{{{ Lang::get('confide::confide.username_e_mail') }}}" required autofocus>
-    <input  type="password" name="password" class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" required value="{{{ Input::old('email') }}}">
+    <input type="text" name="email" class="form-control" placeholder="{{{ Lang::get('thor::confide.username_e_mail') }}}" required autofocus>
+    <input  type="password" name="password" class="form-control" placeholder="{{{ Lang::get('thor::confide.password') }}}" required value="{{{ Input::old('email') }}}">
     <div class='help-block'>
-        <a href="{{{ URL::route('account.forgot') }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
+        <a href="{{{ URL::route('account.forgot_password') }}}">{{{ Lang::get('thor::confide.login.forgot_password') }}}</a>
+        <a href="{{{ URL::route('account.create') }}}">Signup</a>
     </div>
-    <label for="remember" class="checkbox">{{{ Lang::get('confide::confide.login.remember') }}}
+    <label for="remember" class="checkbox">{{{ Lang::get('thor::confide.login.remember') }}}
         <input type="hidden" name="remember" value="0">
         <input tabindex="4" type="checkbox" name="remember" id="remember" value="1">
     </label>
@@ -21,7 +22,7 @@
     @if ( Session::get('notice') )
     <div class="alert">{{{ Session::get('notice') }}}</div>
     @endif
-    <button type="submit" class="btn btn-lg btn-primary btn-block">{{{ Lang::get('confide::confide.login.submit') }}}</button>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">{{{ Lang::get('thor::confide.login.submit') }}}</button>
 
 </form>
 @stop

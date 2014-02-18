@@ -3,7 +3,6 @@
 namespace Mjolnic\Thor;
 
 use View,
-    Config,
     Input,
     Lang,
     Confide,
@@ -20,23 +19,20 @@ use View,
  */
 
 class AccountController extends BaseController {
-    
+
     /**
      * Displays the form for account creation
      *
      */
     public function create() {
-        return View::make(Config::get('thor::views.account_signup_form'));
+        return View::make(Thor::getViewName('account_signup_form'));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
+     * Displays the user profile
      */
     public function show() {
-        return View::make(Config::get('thor::views.account_show'), compact('language'));
+        return View::make(Thor::getViewName('account_show'));
     }
 
     /**
@@ -44,7 +40,7 @@ class AccountController extends BaseController {
      *
      */
     public function store() {
-        $user = new Mjolnic\Thor\User;
+        $user = new \Mjolnic\Thor\User;
 
         $user->username = Input::get('username');
         $user->email = Input::get('email');
@@ -60,13 +56,13 @@ class AccountController extends BaseController {
 
         if ($user->id) {
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
-            return Redirect::action(get_class($this) . '@login')
+            return Redirect::route('account.login')
                             ->with('notice', Lang::get('thor::confide.alerts.account_created'));
         } else {
             // Get validation errors (see Ardent package)
             $error = $user->errors()->all(':message');
 
-            return Redirect::action(get_class($this) . '@create')
+            return Redirect::route('account.create')
                             ->withInput(Input::except('password'))
                             ->with('error', $error);
         }
@@ -80,9 +76,9 @@ class AccountController extends BaseController {
         if (Confide::user()) {
             // If user is logged, redirect to internal 
             // page, change it to '/admin', '/dashboard' or something
-            return Redirect::to('/');
+             return Redirect::route('account.show');
         } else {
-            return View::make(Config::get('thor::views.account_login_form'));
+            return View::make(Thor::getViewName('account_login_form'));
         }
     }
 
@@ -102,14 +98,18 @@ class AccountController extends BaseController {
         // with the second parameter as true.
         // logAttempt will check if the 'email' perhaps is the username.
         // Get the value from the config file instead of changing the controller
-        if (Confide::logAttempt($input, Config::get('thor::views.account_signup_confirm'))) {
+        if (Confide::logAttempt($input, Thor::getViewName('account_signup_confirm'))) {
             // Redirect the user to the URL they were trying to access before
             // caught by the authentication filter IE Redirect::guest('user/login').
             // Otherwise fallback to '/'
             // Fix pull #145
-            return Redirect::intended('/'); // change it to '/admin', '/dashboard' or something
+            if(auth_user()->can('access_backend')){
+                return Redirect::intended(\URL::route('admin'));
+            }else{
+                return Redirect::intended(\URL::route('account.show'));
+            }
         } else {
-            $user = new Mjolnic\Thor\User;
+            $user = new \Mjolnic\Thor\User;
 
             // Check if there was too many login attempts
             if (Confide::isThrottled($input)) {
@@ -120,7 +120,7 @@ class AccountController extends BaseController {
                 $err_msg = Lang::get('thor::confide.alerts.wrong_credentials');
             }
 
-            return Redirect::action(get_class($this) . '@login')
+            return Redirect::route('account.login')
                             ->withInput(Input::except('password'))
                             ->with('error', $err_msg);
         }
@@ -134,11 +134,11 @@ class AccountController extends BaseController {
     public function confirm($code) {
         if (Confide::confirm($code)) {
             $notice_msg = Lang::get('thor::confide.alerts.confirmation');
-            return Redirect::action(get_class($this) . '@login')
+            return Redirect::route('account.login')
                             ->with('notice', $notice_msg);
         } else {
             $error_msg = Lang::get('thor::confide.alerts.wrong_confirmation');
-            return Redirect::action(get_class($this) . '@login')
+            return Redirect::route('account.login')
                             ->with('error', $error_msg);
         }
     }
@@ -148,7 +148,7 @@ class AccountController extends BaseController {
      *
      */
     public function forgot_password() {
-        return View::make(Config::get('thor::views.account_forgot_password_form'));
+        return View::make(Thor::getViewName('account_forgot_password_form'));
     }
 
     /**
@@ -158,11 +158,11 @@ class AccountController extends BaseController {
     public function do_forgot_password() {
         if (Confide::forgotPassword(Input::get('email'))) {
             $notice_msg = Lang::get('thor::confide.alerts.password_forgot');
-            return Redirect::action(get_class($this) . '@login')
+            return Redirect::route('account.login')
                             ->with('notice', $notice_msg);
         } else {
             $error_msg = Lang::get('thor::confide.alerts.wrong_password_forgot');
-            return Redirect::action(get_class($this) . '@forgot_password')
+            return Redirect::route('account.forgot_password')
                             ->withInput()
                             ->with('error', $error_msg);
         }
@@ -173,7 +173,7 @@ class AccountController extends BaseController {
      *
      */
     public function reset_password($token) {
-        return View::make(Config::get('thor::views.account_reset_password_form'))
+        return View::make(Thor::getViewName('account_reset_password_form'))
                         ->with('token', $token);
     }
 
@@ -191,11 +191,11 @@ class AccountController extends BaseController {
         // By passing an array with the token, password and confirmation
         if (Confide::resetPassword($input)) {
             $notice_msg = Lang::get('thor::confide.alerts.password_reset');
-            return Redirect::action(get_class($this) . '@login')
+            return Redirect::route('account.login')
                             ->with('notice', $notice_msg);
         } else {
             $error_msg = Lang::get('thor::confide.alerts.wrong_password_reset');
-            return Redirect::action(get_class($this) . '@reset_password', array('token' => $input['token']))
+            return Redirect::route('account.reset_password', array('token' => $input['token']))
                             ->withInput()
                             ->with('error', $error_msg);
         }
@@ -208,7 +208,7 @@ class AccountController extends BaseController {
     public function logout() {
         Confide::logout();
 
-        return Redirect::to('/');
+        return Redirect::route('account.login');
     }
 
 }

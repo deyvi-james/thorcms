@@ -6,7 +6,7 @@ use View,
     Input,
     Redirect,
     Validator,
-    Admin,
+    Thor,
     Language;
 
 class LanguagesController extends BaseController {
@@ -30,7 +30,7 @@ class LanguagesController extends BaseController {
     public function index() {
         $languages = $this->language->all();
 
-        return View::make(Admin::viewName('languages.index'), compact('languages'));
+        return View::make(Thor::getViewName('languages_index'), compact('languages'));
     }
 
     /**
@@ -39,7 +39,7 @@ class LanguagesController extends BaseController {
      * @return Response
      */
     public function create() {
-        return View::make(Admin::viewName('languages.create'));
+        return View::make(Thor::getViewName('languages_create'));
     }
 
     /**
@@ -71,7 +71,7 @@ class LanguagesController extends BaseController {
      */
     public function show(Language $language) {
 
-        return View::make(Admin::viewName('languages.show'), compact('language'));
+        return View::make(Thor::getViewName('languages_show'), compact('language'));
     }
 
     /**
@@ -86,7 +86,7 @@ class LanguagesController extends BaseController {
             return Redirect::route('admin.languages.index');
         }
 
-        return View::make(Admin::viewName('languages.edit'), compact('language'));
+        return View::make(Thor::getViewName('languages_edit'), compact('language'));
     }
 
     /**

@@ -28,7 +28,7 @@
 
     <div class="form-group">
         {{ Form::submit('Update', array('class' => 'btn btn-info')) }}
-        {{ link_to_route('admin.languages.index', 'Cancel', null, array('class' => 'btn')) }}
+        {{ link_to_route('admin.languages.index', 'Cancel', null, array('class' => 'btn btn-default')) }}
     </div>
 
 {{ Form::close() }}

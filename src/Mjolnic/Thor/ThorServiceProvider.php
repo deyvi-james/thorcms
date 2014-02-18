@@ -2,7 +2,8 @@
 
 namespace Mjolnic\Thor;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider,
+    Config;
 
 class ThorServiceProvider extends ServiceProvider {
 
@@ -20,20 +21,25 @@ class ThorServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->package('mjolnic/thor', 'thor');
-        
+
+        include __DIR__ . '/../../helpers.php';
+
         // Add another directory for extending thor views
         \View::addNamespace('thor', realpath(app_path() . '/views/thor/'));
-        
-        /*\Event::listen('thor::localeNotFound', function(){
-                    dd('Locale not found: '.\Request::segment(1));
-        });*/
-        
-        // Detect locale and language
-        \Mjolnic\Thor\Language::detect();
+        \View::share('admin_window_title', 'ThorCMS' . Thor::VERSION);
 
-        include __DIR__.'/../../helpers.php';
-        include __DIR__.'/../../filters.php';
-        include __DIR__.'/../../routes.php';
+        if (\Config::get('thor::i18n_autodetect')) {
+            // Detect locale and language
+            \Mjolnic\Thor\Language::detect();
+        }
+
+        if (\Config::get('thor::load_filters')) {
+            include __DIR__ . '/../../filters.php';
+        }
+
+        if (\Config::get('thor::load_routes')) {
+            include __DIR__ . '/../../routes.php';
+        }
     }
 
     /**
@@ -51,7 +57,9 @@ class ThorServiceProvider extends ServiceProvider {
      * @return array
      */
     public function provides() {
-        return array();
+        return array(
+            'Bootstrapper\BootstrapperServiceProvider'
+        );
     }
 
 }

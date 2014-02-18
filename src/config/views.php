@@ -4,7 +4,7 @@ return array(
     // LAYOUTS
     'master_layout' => 'thor::layouts.master',
     'account_layout' => 'thor::layouts.account',
-    // FORM VIEWS
+    // ACCOUNT VIEWS
     'account_show' => 'thor::account.show',
     'account_login_form' => 'thor::account.login',
     'account_signup_form' => 'thor::account.signup',
@@ -13,5 +13,13 @@ return array(
     // MAIL VIEWS
     'account_email_reset_password' => 'thor::account.emails.passwordreset', // with $user and $token.
     'account_email_account_confirmation' => 'thor::account.emails.confirm', // with $user
-        // VIEWS
+    // ADMIN PARTIAL VIEWS
+    'admin_navbar' => 'thor::partials.navbar',
+    'admin_sidebar' => 'thor::partials.sidebar',
+    // ADMIN VIEWS
+    'admin_home' => 'thor::admin.home',
+    'languages_index' => 'thor::admin.languages.index',
+    'languages_create' => 'thor::admin.languages.create',
+    'languages_show' => 'thor::admin.languages.show',
+    'languages_edit' => 'thor::admin.languages.edit',
 );

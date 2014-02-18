@@ -21,12 +21,16 @@ class PermissionsTableSeeder extends Seeder {
                 'display_name' => 'manage sites'
             ),
             array(
-                'name' => 'manage_langs',
-                'display_name' => 'manage langs'
+                'name' => 'manage_languages',
+                'display_name' => 'manage languages'
             ),
             array(
                 'name' => 'manage_strings',
                 'display_name' => 'manage strings'
+            ),
+            array(
+                'name' => 'manage_menus',
+                'display_name' => 'manage menus'
             ),
             array(
                 'name' => 'manage_pages',
@@ -92,8 +96,13 @@ class PermissionsTableSeeder extends Seeder {
                 'permission_id' => 9
             ),
             array(
+                'role_id' => 1,
+                'permission_id' => 10
+            ),
+            // user:
+            array(
                 'role_id' => 2,
-                'permission_id' => 9
+                'permission_id' => 10
             ),
         );
 
