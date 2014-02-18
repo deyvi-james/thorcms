@@ -9,7 +9,7 @@ CMS Framework for Laravel 4
 
 ## Features
 
-* [Bootstrap 3](https://github.com/patricktalmadge/bootstrapper/tree/develop) and [Bootswatch] support
+* [Bootstrap 3](https://github.com/patricktalmadge/bootstrapper/tree/develop) and [Bootswatch](http://www.bootstrapcdn.com/#bootswatch_tab) support
 * Supports both multilingual and non-multilingual routes
 * Extensible models and controllers
 * Customizable routes, views and layouts
