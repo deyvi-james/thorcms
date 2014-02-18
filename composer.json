@@ -1,6 +1,7 @@
 {
     "name": "mjolnic/thorcms",
     "description": "Multilingual CMS framework for Laravel 4",
+    "keywords": ["framework", "laravel", "cms", "blog", "thorcms", "backend", "multilingual"],
     "authors": [
         {
             "name": "Javier Aguilar",
