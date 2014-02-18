@@ -33,11 +33,11 @@ Route::group(array('prefix' => App::getLocale()), function() {
      *  Admin Routes
      *  ------------------------------------------
      */
-    Route::group(array('prefix' => Config::get('thor::admin.route_prefix'), 'before' => 'auth'), function() {
+    Route::group(array('prefix' => Config::get('thor::admin.route_prefix'), 'before' => 'admin-auth'), function() {
 
+        Route::get('/', array('as' => 'admin', 'uses' => function(){
+            return View::make('thor::admin.home');
+        }));
         Mjolnic\Thor\Admin::resource('language', 'languages');
-
-        # Admin Dashboard
-        //Route::controller('/', 'AdminDashboardController');
     });
 });

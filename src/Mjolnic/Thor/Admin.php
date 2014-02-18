@@ -13,6 +13,11 @@ class Admin {
         
         Route::model($nameSingular, $model);
         Route::pattern($nameSingular, '[0-9]+');
+        Route::when($nameSingular . '*', function() use ($namePlural) {
+            if ((\Entrust::can('access_backend') && \Entrust::can('manage_' . $namePlural)) == false) { // Checks the current user
+                return \Redirect::route('admin');
+            }
+        });
 
         Route::get($namePlural, array('as' => $rt . '.index', 'uses' => $ctrl . '@index'));
         Route::get($namePlural . '/create', array('as' => $rt . '.create', 'uses' => $ctrl . '@create'));

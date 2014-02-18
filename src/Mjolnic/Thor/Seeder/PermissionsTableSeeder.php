@@ -13,6 +13,10 @@ class PermissionsTableSeeder extends Seeder {
 
         $permissions = array(
             array(
+                'name' => 'access_backend', // can login as a backend user?
+                'display_name' => 'access backend'
+            ),
+            array(
                 'name' => 'manage_sites', // for multisite features
                 'display_name' => 'manage sites'
             ),
@@ -84,8 +88,12 @@ class PermissionsTableSeeder extends Seeder {
                 'permission_id' => 8
             ),
             array(
+                'role_id' => 1,
+                'permission_id' => 9
+            ),
+            array(
                 'role_id' => 2,
-                'permission_id' => 8
+                'permission_id' => 9
             ),
         );
 
