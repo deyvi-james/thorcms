@@ -3,6 +3,9 @@
 @section('main')
 
 <h1>Edit <?php echo ucfirst($singular); ?></h1>
+
+<p>{{ link_to_route('<?php echo admin_route($plural.'.index'); ?>', 'Return to all <?php echo $plural; ?>') }}</p>
+
 {{ Form::model($<?php echo $singular; ?>, array('method' => 'PATCH', 'route' => array('<?php echo admin_route($plural.'.update'); ?>', $<?php echo $singular; ?>->id), 'role'=>'form')) }}
 
 <!-- Form fields here -->

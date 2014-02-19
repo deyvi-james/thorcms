@@ -20,14 +20,17 @@ class CreatePagesTables extends Migration {
             $table->string('action')->nullable();
             $table->string('view')->nullable();
             $table->string('admin_view')->nullable();
-            $table->boolean('is_editable')->default(true);
-            $table->boolean('is_deletable')->default(true);
-            $table->boolean('is_https_only')->default(false);
+            $table->boolean('is_editable')->default(true); // can be edited or is locked?
+            $table->boolean('is_deletable')->default(true);// can be deleted?
+            $table->boolean('is_httpsonly')->default(false); // must run only over HTTPS?
+            $table->boolean('is_indexable')->default(true); // can be indexable by search engines?
+            $table->boolean('is_followable')->default(true); // can links be followed by search engines?
+            $table->boolean('is_mapable')->default(true); // should it be included in sitemap?
             $table->unsignedInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('pages')->onDelete('set null');;
             $table->integer('sorting')->default(0);
-            $table->string('meta_robots')->nullable()->default('INDEX,FOLLOW');
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
         });
 
         Schema::create('page_texts', function(Blueprint $table) {
@@ -41,11 +44,14 @@ class CreatePagesTables extends Migration {
             $table->string('slug')->nullable();
             $table->text('excerpt')->nullable();
             $table->mediumText('content')->nullable();
+            $table->string('redirect_url')->nullable();
+            $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->string('status')->default('draft'); // translation status
             $table->unique(array('language_id', 'slug'));
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
         });
 
         Schema::create('page_pages', function(Blueprint $table) {

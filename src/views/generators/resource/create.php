@@ -3,6 +3,9 @@
 @section('main')
 
 <h1>Create <?php echo ucfirst($singular); ?></h1>
+
+<p>{{ link_to_route('<?php echo admin_route($plural.'.index'); ?>', 'Return to all <?php echo $plural; ?>') }}</p>
+
 {{ Form::open(array('method' => 'POST', 'route' => array('<?php echo admin_route($plural.'.store'); ?>'), 'role'=>'form')) }}
 
 <!-- Form fields here -->

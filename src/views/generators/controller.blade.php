@@ -108,7 +108,7 @@ class {{ucfirst($plural)}}Controller extends \Mjolnic\Thor\BaseController {
         if ($validation->passes()) {
             ${{$singular}}->update($input);
 
-            return Redirect::route('{{Config::get('thor::admin_route_prefix')}}.{{$plural}}.show', ${{$singular}}->id);
+            return Redirect::route('{{Config::get('thor::admin_route_prefix')}}.{{$plural}}.edit', ${{$singular}}->id);
         }
         
         return Redirect::route('{{Config::get('thor::admin_route_prefix')}}.{{$plural}}.edit', ${{$singular}}->id)

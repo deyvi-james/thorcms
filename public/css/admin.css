@@ -54,3 +54,10 @@
 .navbar-brand{
     padding:15px;
 }
+
+.tab-content{
+    border:1px solid #ddd;
+    padding:20px;
+    border-top: none;
+    margin-bottom: 20px;
+}

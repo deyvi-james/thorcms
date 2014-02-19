@@ -46,7 +46,7 @@
                     <p>{{ Session::get('message') }}</p>
                 </div>
                 @endif
-
+                
                 @yield('main')
             </div>
         </div>

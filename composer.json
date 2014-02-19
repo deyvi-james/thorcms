@@ -12,8 +12,7 @@
         "php": ">=5.4.0",
         "illuminate/support": "4.1.*",
         "zizaco/confide": "dev-master",
-        "zizaco/entrust": "dev-master",
-        "patricktalmadge/bootstrapper": "dev-develop"
+        "zizaco/entrust": "dev-master"
     },
     "autoload": {
         "classmap": [

@@ -1,5 +1,6 @@
 (function($) {
     $(function() {
-        // do something on DOM load.
+        // Auto init tabs
+        $('li [data-toggle="tab"]:first').tab('show');
     });
 })(jQuery);

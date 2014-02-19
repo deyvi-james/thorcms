@@ -1,7 +1,6 @@
 @extends(Config::get('thor::views.master_layout'))
 
 @section('main')
-
 <h1>Edit Language</h1>
 {{ Form::model($language, array('method' => 'PATCH', 'route' => array('admin.languages.update', $language->id), 'role'=>'form')) }}
 

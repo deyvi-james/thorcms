@@ -97,13 +97,13 @@ class PagesController extends \Mjolnic\Thor\BaseController {
      * @param  Page  $page     * @return Response
      */
     public function update(Page $page) {
-        $input = array_except(Input::all(), '_method');
-        $validation = Validator::make($input, $page->getRulesExcludingThis('code'));
+        $input = array_except(Input::all(), array('_method', 'translation'));
+        $validation = Validator::make($input, Page::$rules);
 
-        if ($validation->passes()) {
+        if ($validation->passes()) {//dd($input);
             $page->update($input);
 
-            return Redirect::route('admin.pages.show', $page->id);
+            return Redirect::route('admin.pages.edit', $page->id);
         }
         
         return Redirect::route('admin.pages.edit', $page->id)

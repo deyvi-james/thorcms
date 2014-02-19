@@ -27,6 +27,14 @@
                         <li><a href="#">Preferences</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i> {{Language::current()->name}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @foreach(Language::findActive() as $lng)
+                        <li class="{{($lng->id == lang_id()) ? 'active' : ''}}"><a href="{{admin_url(null, $lng->code)}}">{{$lng->name}} ({{$lng->code}})</a></li>
+                        @endforeach
+                    </ul>
+                </li>
                 <li><a title="Logged in as {{auth_user()->email}}" href="{{URL::route('account.logout')}}">{{Thor::getGravatar(auth_user()->email, 25, true, array('class'=>'gravatar'))}} Log out</a></li>
             </ul>
         </div><!--/.nav-collapse -->
