@@ -8,11 +8,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{admin_url()}}">ThorCMS</a>
+            <a class="navbar-brand thor-logo" href="{{admin_url()}}">  <i class="fa fa-bolt"></i> Thor </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{admin_url()}}"><i class="fa fa-dashboard"></i></a></li>
                 <li><a href="#">Pages</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

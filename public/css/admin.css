@@ -1,4 +1,46 @@
+.al-c{
+	text-align: center;
+}
+.al-r{
+	text-align: right;
+}
+.al-l{
+	text-align: left;
+}
+
+.inl{
+	display:inline-block;
+}
+.inl-list{
+	margin:0;
+	padding:0;
+}
+
+.inl-list li{
+	display: inline-block;
+	margin:0 10px 0 0;
+}
+
+.thor-logo{
+    font-weight: bold;
+    font-style: italic;
+    z-index: 99;
+}
+
+.thor-logo .fa-bolt{
+    font-size: 120%;
+    vertical-align: middle;
+}
+
 .admin-main{
     margin-top:61px;
     padding:40px 0;
+}
+
+.navbar-brand{
+    padding:15px;
+    height:auto;
+    line-height: 30px;
+    height:60px;
+    
 }
