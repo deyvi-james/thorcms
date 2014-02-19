@@ -12,6 +12,9 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
         @if(Config::get('thor::bootswatch_theme')!==false)
         <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.0/{{Config::get('thor::bootswatch_theme')}}/bootstrap.min.css" rel="stylesheet">
+        @else
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
         @endif
         <link href="{{admin_asset('css/admin.css')}}" rel="stylesheet">
         

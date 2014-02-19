@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'bootswatch_theme' => 'flatly', // http://www.bootstrapcdn.com/#bootswatch_tab
+    'bootswatch_theme' => 'flatly', // bootswatch (http://www.bootstrapcdn.com/#bootswatch_tab) theme name or false
     'admin_route_prefix' => 'admin',
     'i18n_autodetect' => true,
     'i18n_default_locale' => 'en',
