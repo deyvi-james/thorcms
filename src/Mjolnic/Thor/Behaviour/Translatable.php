@@ -33,8 +33,9 @@ trait Translatable {
         if (!is_int($langId)) {
             $langId = lang_id();
         }
-        //dd($this->textsAll());
-        return $this->translations()->where('language_id', '=', $langId)->first();
+        $transl = $this->translations()->where('language_id', '=', $langId)->first();
+        $textClass = (get_class($this) . 'Text');
+        return $transl ? $transl : new $textClass; // return existant or a new empty model
     }
 
     /**

@@ -17,6 +17,13 @@ function admin_asset($path = null, $secure = null){
     return asset('packages/'.  thor_package().'/'.ltrim($path, '/'), $secure);
 }
 
+function switch_locale($newLocale){
+    $sg = Request::segments();
+    array_shift($sg);
+    array_unshift($sg, $newLocale);
+    return URL::to(implode('/', $sg));
+}
+
 function lang_code(){
     return Mjolnic\Thor\Language::current()->code;
 }

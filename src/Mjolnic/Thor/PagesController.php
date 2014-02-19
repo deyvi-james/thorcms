@@ -52,18 +52,23 @@ class PagesController extends \Mjolnic\Thor\BaseController {
      * @return Response
      */
     public function store() {
-        $input = Input::all();
+        $input = array_except(Input::all(), array('_method', 'translation'));
+        $transl_input = array_except(Input::get('translation'), 'id');
         $validation = Validator::make($input, Page::$rules);
+        $transl_validation = Validator::make($transl_input, PageText::$rules);
 
         if ($validation->passes()) {
-            $this->page->create($input);
-
-            return Redirect::route('admin.pages.index');
+            $this->page = $this->page->create($input);
+            if ($transl_validation->passes()) {
+                PageText::create(array_merge(array('language_id'=>  lang_id(), 'page_id'=>$this->page->id), $transl_input));
+                return Redirect::route('admin.pages.index');
+            }
         }
 
         return Redirect::route('admin.pages.create')
                         ->withInput()
                         ->withErrors($validation)
+                        ->withErrors($transl_validation)
                         ->with('message', 'There were validation errors.');
     }
 
@@ -106,8 +111,12 @@ class PagesController extends \Mjolnic\Thor\BaseController {
             $page->update($input);
             if ($transl_validation->passes()) {
                 // Save translation
-                $transl = PageText::find(Input::get('translation.id'));
-                $transl->update($transl_input);
+                if(Input::get('translation.id')){
+                    $transl = PageText::find(Input::get('translation.id'));
+                    $transl->update($transl_input);
+                }else{
+                    PageText::create(array_merge(array('language_id'=>  lang_id(), 'page_id'=>$page->id), $transl_input));
+                }
                 return Redirect::route('admin.pages.edit', $page->id);
             }
         }

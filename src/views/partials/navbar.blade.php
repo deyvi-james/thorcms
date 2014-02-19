@@ -31,7 +31,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i> {{Language::current()->name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         @foreach(Language::findActive() as $lng)
-                        <li class="{{($lng->id == lang_id()) ? 'active' : ''}}"><a href="{{admin_url(null, $lng->code)}}">{{$lng->name}} ({{$lng->code}})</a></li>
+                        <li class="{{($lng->id == lang_id()) ? 'active' : ''}}"><a href="{{switch_locale($lng->code)}}">{{$lng->name}} ({{$lng->code}})</a></li>
                         @endforeach
                     </ul>
                 </li>

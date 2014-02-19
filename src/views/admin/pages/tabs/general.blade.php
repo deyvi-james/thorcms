@@ -1,5 +1,5 @@
 <div class="tab-pane active" id="t1">
-    <pre>{{$page}}</pre>
+    <pre>{{$page or ''}}</pre>
     <?php
     // For current language
     $tr = isset($page) ? $page->translation() : new \Mjolnic\Thor\PageText();
