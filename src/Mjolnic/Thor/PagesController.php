@@ -98,17 +98,24 @@ class PagesController extends \Mjolnic\Thor\BaseController {
      */
     public function update(Page $page) {
         $input = array_except(Input::all(), array('_method', 'translation'));
+        $transl_input = array_except(Input::get('translation'), 'id');
         $validation = Validator::make($input, Page::$rules);
+        $transl_validation = Validator::make($transl_input, PageText::$rules);
 
-        if ($validation->passes()) {//dd($input);
+        if ($validation->passes()) {
             $page->update($input);
-
-            return Redirect::route('admin.pages.edit', $page->id);
+            if ($transl_validation->passes()) {
+                // Save translation
+                $transl = PageText::find(Input::get('translation.id'));
+                $transl->update($transl_input);
+                return Redirect::route('admin.pages.edit', $page->id);
+            }
         }
         
         return Redirect::route('admin.pages.edit', $page->id)
                         ->withInput()
                         ->withErrors($validation)
+                        ->withErrors($transl_validation)
                         ->with('message', 'There were validation errors.');
     }
 

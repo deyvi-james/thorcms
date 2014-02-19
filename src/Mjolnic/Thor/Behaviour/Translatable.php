@@ -5,7 +5,9 @@ namespace Mjolnic\Thor\Behaviour;
 trait Translatable {
 
     public function __get($key) {
-        if (isset($this->translation()->$key)) {
+        if (isset($this->$key)) {
+            return parent::__get($key);
+        } elseif (isset($this->translation()->$key)) {
             return $this->translation()->$key;
         } else {
             return parent::__get($key);

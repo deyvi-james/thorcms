@@ -16,7 +16,6 @@
             <th colspan="2">Actions</th>
         </tr>
     </thead>
-
     <tbody>
         @foreach ($pages as $page)
         <tr>

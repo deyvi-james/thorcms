@@ -54,6 +54,7 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="{{admin_asset('js/utils.js')}}"></script>
         <script src="{{admin_asset('js/admin.js')}}"></script>
         @yield('body_append')
     </body>

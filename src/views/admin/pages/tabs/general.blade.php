@@ -8,7 +8,7 @@
     {{ Form::hidden('translation[id]', $tr->id) }}
     <div class="form-group">
         {{ Form::label(null, 'Title') }}
-        {{ Form::text('translation[title]', $tr->title, array('class' => 'form-control')) }}
+        {{ Form::text('translation[title]', $tr->title, array('class' => 'form-control sluggable', 'sluggable-output'=>'input[name=\'translation[slug]\']')) }}
     </div>
     <div class="form-group">
         {{ Form::label(null, 'Subtitle') }}
@@ -20,11 +20,11 @@
     </div>
     <div class="form-group"><?php //Form::select($name, $list, $selected, $options); ?>
         {{ Form::label(null, 'Publish status:') }}
-        {{ Form::select('status', array('draft' => 'Draft', 'published' => 'Published'), $page->getAttribute('status'), array('class' => 'form-control')) }}
+        {{ Form::select('status', array('draft' => 'Draft', 'published' => 'Published'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
         {{ Form::label(null, 'Translation status ('.Language::current()->name.'):') }}
-        {{ Form::select('translation[status]', array('draft' => 'Draft', 'published' => 'Published'), $tr->getAttribute('status'), array('class' => 'form-control')) }}
+        {{ Form::select('translation[status]', array('draft' => 'Draft', 'published' => 'Published'), null, array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
         {{ Form::label(null, 'Excerpt') }}
