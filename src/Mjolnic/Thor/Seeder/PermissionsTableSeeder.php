@@ -8,8 +8,6 @@ use Seeder,
 class PermissionsTableSeeder extends Seeder {
 
     public function run() {
-        DB::table('permissions')->truncate();
-
 
         $permissions = array(
             array(

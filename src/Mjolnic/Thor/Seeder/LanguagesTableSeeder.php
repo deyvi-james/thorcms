@@ -1,11 +1,14 @@
 <?php
 
+namespace Mjolnic\Thor\Seeder;
+
+use Seeder,
+    DB,
+    DateTime;
+
 class LanguagesTableSeeder extends Seeder {
 
     public function run() {
-        // Uncomment the below to wipe the table clean before populating
-        DB::table('languages')->truncate();
-
         $languages = array(
             array(
                 'name' => 'Español',

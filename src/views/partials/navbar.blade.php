@@ -12,7 +12,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">Pages</a></li>
+                <li>{{link_to_route('admin.pages.index', 'Pages')}}</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Users</a></li>

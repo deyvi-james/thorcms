@@ -9,7 +9,7 @@
 
 <div class="form-group">
     {{ Form::submit('Update', array('class' => 'btn btn-info')) }}
-    {{ link_to_route('<?php echo admin_route($plural.'.show'); ?>', 'Cancel', $<?php echo $singular; ?>->id, array('class' => 'btn btn-default')) }}
+    {{ link_to_route('<?php echo admin_route($plural.'.index'); ?>', 'Cancel', $<?php echo $singular; ?>->id, array('class' => 'btn btn-default')) }}
 </div>
 
 {{ Form::close() }}

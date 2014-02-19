@@ -20,4 +20,5 @@ Route::group(array('prefix' => App::getLocale()), function() {
     });
     // Resources
     Mjolnic\Thor\Thor::setAdminResourceRoutes('language');
+    Mjolnic\Thor\Thor::setAdminResourceRoutes('page');
 });

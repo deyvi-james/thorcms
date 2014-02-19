@@ -28,7 +28,7 @@ class ThorServiceProvider extends ServiceProvider {
         \View::addNamespace('thor', realpath(app_path() . '/views/thorcms/'));
         \View::share('admin_window_title', 'ThorCMS' . Thor::VERSION);
 
-        if (\Config::get('thor::i18n_autodetect')) {
+        if (\Config::get('thor::i18n_autodetect') && \Schema::hasTable('languages')) {
             // Detect locale and language
             \Mjolnic\Thor\Language::detect();
         }

@@ -10,7 +10,6 @@ use Seeder,
 class RolesTableSeeder extends Seeder {
 
     public function run() {
-        DB::table('roles')->truncate();
 
         $adminRole = new Role;
         $adminRole->name = 'admin';

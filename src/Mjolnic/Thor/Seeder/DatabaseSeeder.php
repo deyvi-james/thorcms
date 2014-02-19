@@ -12,13 +12,14 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        Eloquent::unguard();
+        \Eloquent::unguard();
 
         // Add calls to Seeders here
         $this->call('Mjolnic\Thor\Seeder\UsersTableSeeder');
         $this->call('Mjolnic\Thor\Seeder\RolesTableSeeder');
         $this->call('Mjolnic\Thor\Seeder\PermissionsTableSeeder');
         $this->call('Mjolnic\Thor\Seeder\LanguagesTableSeeder');
+        $this->call('Mjolnic\Thor\Seeder\PagesTableSeeder');
     }
 
 }
