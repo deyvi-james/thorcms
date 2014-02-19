@@ -8,15 +8,17 @@ use Route,
 class Thor {
 
     const VERSION = '1.0.0-dev';
+    const PACKAGE = 'mjolnic/thorcms';
+    const NS = 'thor';
 
     public static function getViewName($name) {
-        return \Config::get('thor::views.' . $name, 'thor::admin.' . str_replace('_', '.', $name));
+        return \Config::get(thor_ns().'::views.' . $name, thor_ns().'::admin.' . str_replace('_', '.', $name));
     }
 
     public static function setAdminResourceRoutes($singular, $namespace = '\\Mjolnic\\Thor\\') {
-        Route::group(array('prefix' => Config::get('thor::admin_route_prefix'), 'before' => 'admin-auth'), function() use($singular, $namespace) {
+        Route::group(array('prefix' => Config::get(thor_ns().'::admin_route_prefix'), 'before' => 'admin-auth'), function() use($singular, $namespace) {
             $plural = \Str::plural($singular);
-            $rt = \Config::get('thor::admin_route_prefix') . '.' . $plural;
+            $rt = \Config::get(thor_ns().'::admin_route_prefix') . '.' . $plural;
             $ctrl = $namespace . ucfirst($plural) . 'Controller';
             $model = $namespace . ucfirst($singular);
 

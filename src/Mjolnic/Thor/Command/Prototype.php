@@ -14,7 +14,7 @@ class Prototype extends Command {
      *
      * @var string
      */
-    protected $name = 'thor:prototype';
+    protected $name;
 
     /**
      * The console command description.
@@ -29,6 +29,7 @@ class Prototype extends Command {
      * @return void
      */
     public function __construct() {
+        $this->name = thor_ns().':prototype';
         parent::__construct();
     }
 
@@ -48,7 +49,7 @@ class Prototype extends Command {
 
             $namespace_path = str_replace('\\', DIRECTORY_SEPARATOR, trim($namespace, '\\'));
             $paths['src'] = app_path() . '/src/' . $namespace_path . '/';
-            $paths['views'] = app_path() . '/views/thorcms/admin/' . $filename_prefix . $plural . '/';
+            $paths['views'] = app_path() . '/views/'.thor_ns().'/admin/' . $filename_prefix . $plural . '/';
 
             $model_name = ucfirst($singular);
             $controller_name = ucfirst($plural) . 'Controller';
@@ -59,14 +60,14 @@ class Prototype extends Command {
                 }
             }
 
-            $files[$paths['src'] . $filename_prefix . $controller_name] = View::make('thor::generators.controller', $vars);
-            $files[$paths['src'] . $filename_prefix . $model_name] = View::make('thor::generators.model', $vars);
-            $files[app_path() . '/database/migrations/' . $timestamp . 'create_' . $plural . '_table'] = View::make('thor::generators.migration', $vars);
+            $files[$paths['src'] . $filename_prefix . $controller_name] = View::make(thor_ns().'::generators.controller', $vars);
+            $files[$paths['src'] . $filename_prefix . $model_name] = View::make(thor_ns().'::generators.model', $vars);
+            $files[app_path() . '/database/migrations/' . $timestamp . 'create_' . $plural . '_table'] = View::make(thor_ns().'::generators.migration', $vars);
 
-            $files[$paths['views'] . 'create.blade'] = View::make('thor::generators.resource.create', $vars);
-            $files[$paths['views'] . 'edit.blade'] = View::make('thor::generators.resource.edit', $vars);
-            $files[$paths['views'] . 'index.blade'] = View::make('thor::generators.resource.index', $vars);
-            $files[$paths['views'] . 'show.blade'] = View::make('thor::generators.resource.show', $vars);
+            $files[$paths['views'] . 'create.blade'] = View::make(thor_ns().'::generators.resource.create', $vars);
+            $files[$paths['views'] . 'edit.blade'] = View::make(thor_ns().'::generators.resource.edit', $vars);
+            $files[$paths['views'] . 'index.blade'] = View::make(thor_ns().'::generators.resource.index', $vars);
+            $files[$paths['views'] . 'show.blade'] = View::make(thor_ns().'::generators.resource.show', $vars);
 
             foreach ($files as $path => $content) {
                 file_put_contents($path . '.php', $content);

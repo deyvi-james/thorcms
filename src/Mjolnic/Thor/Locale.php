@@ -11,8 +11,8 @@ class Locale {
         }
 
         if ($language == false) {
-            $language = \Config::get('thor::i18n_default_locale');
-            \Event::fire('thor::invalid_locale', array($language), false);
+            $language = \Config::get(thor_ns().'::i18n_default_locale');
+            \Event::fire(thor_ns().'::invalid_locale', array($language), false);
         }
         \Config::set('app.locale', $language);
         \App::setLocale($language);
@@ -28,7 +28,7 @@ class Locale {
         $language = $default;
         if (null !== \Request::segment($index)) {
             $routeLanguage = \Request::segment($index);
-            if (in_array($routeLanguage, \Config::get('thor::i18n_locales'))) {
+            if (in_array($routeLanguage, \Config::get(thor_ns().'::i18n_locales'))) {
                 $language = $routeLanguage;
             }
         } else {

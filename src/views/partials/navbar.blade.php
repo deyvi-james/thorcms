@@ -8,10 +8,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand thor-logo" href="{{admin_url()}}">  <i class="fa fa-bolt"></i> Thor </a>
+            <a class="navbar-brand thor-logo" href="{{locale_url()}}"><i class="fa fa-long-arrow-left"></i> {{Config::get('thor::brand_name', '<i class="fa fa-bolt"></i> Thor')}}</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                <li><a href="{{admin_url()}}" target="_blank">Dashboard</a></li>
                 <li>{{link_to_route('admin.pages.index', 'Pages')}}</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -26,7 +27,7 @@
                         <li><a href="#">Preferences</a></li>
                     </ul>
                 </li>
-                <li><a href="{{URL::route('account.logout')}}">{{Thor::getGravatar(auth_user()->email, 25, true, array('class'=>'gravatar'))}} Log out</a></li>
+                <li><a title="Logged in as {{auth_user()->email}}" href="{{URL::route('account.logout')}}">{{Thor::getGravatar(auth_user()->email, 25, true, array('class'=>'gravatar'))}} Log out</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

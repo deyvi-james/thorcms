@@ -20,8 +20,8 @@ class Language extends Model {
     public static function detect() {
         $activeLangs = self::findActive();
         if (count($activeLangs) > 0) {
-            \Config::set('thor::i18n_default_locale', $activeLangs[0]->code);
-            \Config::set('thor::i18n_locales', array_pluck($activeLangs, 'code'));
+            \Config::set(thor_ns().'::i18n_default_locale', $activeLangs[0]->code);
+            \Config::set(thor_ns().'::i18n_locales', array_pluck($activeLangs, 'code'));
             $currentCode = Locale::detect();
             foreach ($activeLangs as $ln) {
                 if ($ln->code == $currentCode) {

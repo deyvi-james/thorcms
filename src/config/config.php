@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'brand_name' => '',
     'bootswatch_theme' => 'flatly', // bootswatch (http://www.bootstrapcdn.com/#bootswatch_tab) theme name or false
     'admin_route_prefix' => 'admin',
     'i18n_autodetect' => true,

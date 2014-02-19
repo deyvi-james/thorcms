@@ -13,7 +13,7 @@ Route::group(array('prefix' => App::getLocale()), function() {
     Mjolnic\Thor\Thor::setAccountRoutes('account');
 
     // Admin
-    Route::group(array('prefix' => Config::get('thor::admin_route_prefix'), 'before' => 'admin-auth'), function() {
+    Route::group(array('prefix' => Config::get(thor_ns().'::admin_route_prefix'), 'before' => 'admin-auth'), function() {
         Route::get('/', array('as' => 'admin', 'uses' => function() {
             return View::make(Thor::getViewName('admin_home'));
         }));

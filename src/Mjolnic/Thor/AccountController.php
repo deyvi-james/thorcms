@@ -57,7 +57,7 @@ class AccountController extends BaseController {
         if ($user->id) {
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
             return Redirect::route('account.login')
-                            ->with('notice', Lang::get('thor::confide.alerts.account_created'));
+                            ->with('notice', Lang::get(thor_ns().'::confide.alerts.account_created'));
         } else {
             // Get validation errors (see Ardent package)
             $error = $user->errors()->all(':message');
@@ -113,11 +113,11 @@ class AccountController extends BaseController {
 
             // Check if there was too many login attempts
             if (Confide::isThrottled($input)) {
-                $err_msg = Lang::get('thor::confide.alerts.too_many_attempts');
+                $err_msg = Lang::get(thor_ns().'::confide.alerts.too_many_attempts');
             } elseif ($user->checkUserExists($input) and !$user->isConfirmed($input)) {
-                $err_msg = Lang::get('thor::confide.alerts.not_confirmed');
+                $err_msg = Lang::get(thor_ns().'::confide.alerts.not_confirmed');
             } else {
-                $err_msg = Lang::get('thor::confide.alerts.wrong_credentials');
+                $err_msg = Lang::get(thor_ns().'::confide.alerts.wrong_credentials');
             }
 
             return Redirect::route('account.login')
@@ -133,11 +133,11 @@ class AccountController extends BaseController {
      */
     public function confirm($code) {
         if (Confide::confirm($code)) {
-            $notice_msg = Lang::get('thor::confide.alerts.confirmation');
+            $notice_msg = Lang::get(thor_ns().'::confide.alerts.confirmation');
             return Redirect::route('account.login')
                             ->with('notice', $notice_msg);
         } else {
-            $error_msg = Lang::get('thor::confide.alerts.wrong_confirmation');
+            $error_msg = Lang::get(thor_ns().'::confide.alerts.wrong_confirmation');
             return Redirect::route('account.login')
                             ->with('error', $error_msg);
         }
@@ -157,11 +157,11 @@ class AccountController extends BaseController {
      */
     public function do_forgot_password() {
         if (Confide::forgotPassword(Input::get('email'))) {
-            $notice_msg = Lang::get('thor::confide.alerts.password_forgot');
+            $notice_msg = Lang::get(thor_ns().'::confide.alerts.password_forgot');
             return Redirect::route('account.login')
                             ->with('notice', $notice_msg);
         } else {
-            $error_msg = Lang::get('thor::confide.alerts.wrong_password_forgot');
+            $error_msg = Lang::get(thor_ns().'::confide.alerts.wrong_password_forgot');
             return Redirect::route('account.forgot_password')
                             ->withInput()
                             ->with('error', $error_msg);
@@ -190,11 +190,11 @@ class AccountController extends BaseController {
 
         // By passing an array with the token, password and confirmation
         if (Confide::resetPassword($input)) {
-            $notice_msg = Lang::get('thor::confide.alerts.password_reset');
+            $notice_msg = Lang::get(thor_ns().'::confide.alerts.password_reset');
             return Redirect::route('account.login')
                             ->with('notice', $notice_msg);
         } else {
-            $error_msg = Lang::get('thor::confide.alerts.wrong_password_reset');
+            $error_msg = Lang::get(thor_ns().'::confide.alerts.wrong_password_reset');
             return Redirect::route('account.reset_password', array('token' => $input['token']))
                             ->withInput()
                             ->with('error', $error_msg);
