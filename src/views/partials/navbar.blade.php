@@ -26,7 +26,7 @@
                         <li><a href="#">Preferences</a></li>
                     </ul>
                 </li>
-                <li><a href="{{URL::route('account.logout')}}">Log out</a></li>
+                <li><a href="{{URL::route('account.logout')}}">{{Thor::getGravatar(auth_user()->email, 25, true, array('class'=>'gravatar'))}} Log out</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

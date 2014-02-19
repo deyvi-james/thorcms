@@ -1,24 +1,24 @@
 .al-c{
-	text-align: center;
+    text-align: center;
 }
 .al-r{
-	text-align: right;
+    text-align: right;
 }
 .al-l{
-	text-align: left;
+    text-align: left;
 }
 
 .inl{
-	display:inline-block;
+    display:inline-block;
 }
 .inl-list{
-	margin:0;
-	padding:0;
+    margin:0;
+    padding:0;
 }
 
 .inl-list li{
-	display: inline-block;
-	margin:0 10px 0 0;
+    display: inline-block;
+    margin:0 10px 0 0;
 }
 
 .thor-logo{
@@ -35,4 +35,22 @@
 .admin-main{
     margin-top:61px;
     padding:40px 0;
+}
+
+.navbar-nav>li>a{
+    padding:15px;
+}
+.admin-navbar{
+    min-height: 50px;
+}
+.admin-navbar .gravatar{
+    border:1px solid rgba(255,255,255,0.6);
+    border-radius: 4px;
+    width:24px;
+    height:24px;
+    margin-right: 5px;
+    display:inline-block;
+}
+.navbar-brand{
+    padding:15px;
 }
