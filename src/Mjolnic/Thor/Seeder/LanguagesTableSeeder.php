@@ -11,13 +11,17 @@ class LanguagesTableSeeder extends Seeder {
                 'name' => 'Español',
                 'code' => 'es',
                 'is_active' => 1,
-                'sorting' => 1
+                'sorting' => 1,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
             ),
             array(
                 'name' => 'English',
                 'code' => 'en',
                 'is_active' => 1,
-                'sorting' => 2
+                'sorting' => 2,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
             ),
         );
 

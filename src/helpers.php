@@ -2,13 +2,12 @@
 
 // Helper functions here
 
-
-function locale_route($path = null) {
-    return App::getLocale() . '/' . ltrim($path, '/');
+function locale_url($path = null, $parameters = array(), $secure = null) {
+    return url(App::getLocale() . '/' . ltrim($path, '/'), $parameters, $secure);
 }
 
-function locale_url($path = null, $parameters = array(), $secure = null) {
-    return url(locale_route($path), $parameters, $secure);
+function admin_route($route = null) {
+    return Config::get('thor::admin_route_prefix') . '.' . ltrim($route, '.');
 }
 
 function admin_url($path = null, $parameters = array(), $secure = null) {
@@ -16,7 +15,7 @@ function admin_url($path = null, $parameters = array(), $secure = null) {
 }
 
 function admin_asset($path = null, $secure = null){
-    return asset('packages/mjolnic/thor/'.ltrim($path, '/'), $secure);
+    return asset('packages/mjolnic/thorcms/'.ltrim($path, '/'), $secure);
 }
 
 function lang_code(){

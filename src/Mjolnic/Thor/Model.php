@@ -2,6 +2,11 @@
 
 namespace Mjolnic\Thor;
 
+/**
+ * @property int $id Primary key value
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ */
 abstract class Model extends \Eloquent {
 
     protected $guarded = array();

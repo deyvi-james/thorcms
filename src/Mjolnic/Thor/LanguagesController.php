@@ -1,13 +1,11 @@
 <?php
 
-namespace Mjolnic\Thor\Admin;
+namespace Mjolnic\Thor;
 
 use View,
     Input,
     Redirect,
-    Validator,
-    Thor,
-    Language;
+    Validator;
 
 class LanguagesController extends BaseController {
 

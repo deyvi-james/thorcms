@@ -25,7 +25,7 @@ class ThorServiceProvider extends ServiceProvider {
         include __DIR__ . '/../../helpers.php';
 
         // Add another directory for extending thor views
-        \View::addNamespace('thor', realpath(app_path() . '/views/thor/'));
+        \View::addNamespace('thor', realpath(app_path() . '/views/thorcms/'));
         \View::share('admin_window_title', 'ThorCMS' . Thor::VERSION);
 
         if (\Config::get('thor::i18n_autodetect')) {
